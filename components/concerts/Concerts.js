@@ -6,12 +6,14 @@ function Concerts(props) {
     const [error, setError] = useState()
     const [concerts, setConcerts] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const [locationChange, setLocationChange] = useState('')
 
     // function that does the fetching
     async function fetchConcertData() {
         setIsLoading(true);
         setError(null);
         try {
+        console.log(props.city, props.state)
         const dataArray = [];
         for (const artistName of props.artistNames) {
             const response = await fetch(`/api/concerts?artist_name=${encodeURIComponent(artistName)}`);
@@ -32,6 +34,7 @@ function Concerts(props) {
         });
         // putting the item in local storage so refreshing or exiting out of the page doesnt reload data
         await localStorage.setItem('concerts', JSON.stringify(combinedData));
+        await localStorage.setItem('location', props.location);
         setConcerts(combinedData);
         } catch (error) {
             console.log(error);
@@ -39,25 +42,22 @@ function Concerts(props) {
         }
       setIsLoading(false);
     }
-
+    
     useEffect(() => {
         // given that the artistNames are loaded in 
         if (props.artistNames && props.artistNames.length > 0) {
             const storedConcerts = localStorage.getItem('concerts');
-            if (storedConcerts && storedConcerts != 'undefined') {
+            const storedLocation = localStorage.getItem('location');
+            console.log("stored location", storedLocation, "props.location", props.location);
+            if (storedConcerts && storedConcerts != 'undefined' && props.location === storedLocation) {
                 setConcerts(JSON.parse(storedConcerts));
-            } else {
+            } else if (props.location.length > 0) {
+                localStorage.removeItem('location');
+                localStorage.setItem('location', props.location);
                 fetchConcertData();
             }
         }
-    }, [props.artistNames]);
-
-    // useEffect(() => {
-    //     // given that the concerts are loaded in
-    //     if (concerts && concerts.length > 0) {
-    //         console.log(concerts);
-    //     }
-    // }, [concerts]);
+    }, [props.artistNames, props.location]);
 
     return (
         <div>

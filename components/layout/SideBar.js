@@ -8,6 +8,7 @@ function SideBar() {
 
     function handleLogout() {
         localStorage.removeItem('concerts')
+        localStorage.removeItem('location')
         signOut()
         router.push('/login');
     }
