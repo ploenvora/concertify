@@ -3,7 +3,7 @@ import { FiSearch } from "react-icons/fi"; // Importing the search icon
 
 function Search() {
   return (
-    <div className="cursor-pointer border-none rounded-full bg-white inline-flex items-center px-4 py-2 w-[24vw] h-[5vh] min-h-[30px] min-w-[300px]">
+    <div className="cursor-pointer border-none rounded-full bg-white inline-flex items-center px-4 py-2 w-[24vw] h-[5vh] min-h-[30px] min-w-[300px] shadow-sm">
       <input
         type="text"
         placeholder="Search"
@@ -15,3 +15,4 @@ function Search() {
 }
 
 export default Search;
+

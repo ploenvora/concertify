@@ -12,7 +12,7 @@ function Navigation() {
                 <Search />
             </div>
             <div className="flex items-center justify-end flex-shrink-0 md:w-1/3">
-                <SideBar className="flex-grow" />
+                <SideBar />
             </div>
         </div>
     );
