@@ -1,0 +1,17 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@font-face {
+  font-family: "Gotham";
+  src: url("../styles/font/GothamMedium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Spotify";
+  src: url("../styles/font/CircularSpotifyText-Medium.otf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
