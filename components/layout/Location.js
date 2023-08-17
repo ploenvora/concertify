@@ -1,5 +1,33 @@
 import { useState, useEffect } from "react";
+import { FaLocationArrow } from 'react-icons/fa';
 import axios from "axios";
+import ReactSelect from "react-select";
+
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    backgroundColor: "#f7f7f7",
+    boxShadow: "none",
+    "&:hover": {
+      borderColor: "#1db954",
+    },
+  }),
+  menu: (provided) => ({
+    ...provided,
+    backgroundColor: "#f7f7f7",
+    maxWidth: '100%',
+    whiteSpace: 'normal',
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? "#e5e5e5" : "transparent",
+    color: "#282828",
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: "#282828",
+  }),
+};
 
 function Location({ onLocationChange }) {
   function setDefault() {
@@ -111,28 +139,48 @@ function Location({ onLocationChange }) {
     setEditing(false);
   };
 
+  const options = cities.map(city => ({ value: city, label: city }));
+
   return (
-    <div className="Location">
+    <div className="p-4 rounded-md text-grey-900">
       {loading ? (
         <div>Current Location: Loading...</div>
       ) : editing ? (
-        <div>
-          <select value={selectedCity} onChange={handleCitySelection}>
-            <option value="" disabled>
-              Select a city
-            </option>
-            {cities.map((city) => (
-              <option key={city} value={city}>
-                {city}
-              </option>
-            ))}
-          </select>
-          <button onClick={handleGetCurrentLocation}>
+        <div className="flex flex-col items-start space-y-2">
+          <ReactSelect 
+            options={options}
+            value={{value: selectedCity, label: selectedCity}}
+            onChange={(option) => {
+              const city = option.value.split(", ")[0];
+              const state = option.value.split(", ")[1];
+              if (city === selectedCity && state === selectedState) {
+                setEditing(false);
+                return;
+              }
+              setSelectedCity(city);
+              setSelectedState(state);
+              onLocationChange(city, state);
+              setEditing(false);
+            }}
+            styles={customStyles}
+            placeholder="Select a city..."
+            className="w-full text-gray-300 rounded shadow-md" 
+          />
+          <button 
+            onClick={handleGetCurrentLocation} 
+            className="bg-green-500 hover:bg-green-600 rounded-md p-2 shadow-md transition duration-300 w-full text-white"
+          >
+            <FaLocationArrow className="inline mr-2" />
             Get Current Location
           </button>
         </div>
       ) : (
-        <div onClick={handleEditLocation}>Current Location: {location}</div>
+        <div 
+          onClick={handleEditLocation} 
+          className="text-grey-900 hover:text-green-500 cursor-pointer transition duration-300"
+        >
+          Current Location: {location}
+        </div>
       )}
     </div>
   );

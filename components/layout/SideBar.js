@@ -26,7 +26,7 @@ function SideBar() {
     {session && session.user && (
         <div className="relative">
             <button 
-                className="bg-white shadow-sm hover:bg-gray-400 text-gray-900 font-bold rounded-full flex items-center h-[5vh] min-h-[30px]"
+                className="bg-white shadow-sm hover:bg-gray-400 text-gray-900 font-bold rounded-full flex items-center h-[5vh] min-h-[30px] transition duration-300"
                 onClick={handleDropdown}
             >
                 <div className="flex items-center">
