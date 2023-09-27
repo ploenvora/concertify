@@ -7,7 +7,6 @@ Concertify is a personalized concert suggestion platform that uses your Spotify 
 1. **Spotify Integration**: Connect your Spotify account to sync your listening history.
 2. **Personalized Recommendations**: Tailored suggestions based on your favorite artists, albums, and genres.
 3. **Nearby Concert Alerts**: Receive real-time notifications for upcoming concerts in your area.
-4. **Interactive Map**: Explore concerts through an intuitive map interface.
 5. **User-friendly Design**: A sleek and modern interface that is simple and easy to navigate.
 
 ## 🎤 How It Works
