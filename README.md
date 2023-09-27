@@ -1,4 +1,4 @@
-# 🎵 Concertify - Connect Your Beats to the Streets 🎵
+# 🎵 Concertify 🎵
 
 Concertify is a personalized concert suggestion platform that uses your Spotify listening history to find live music events near you. Built using Next.js and React, this innovative website effortlessly blends your digital music experience with real-world concert exploration.
 
